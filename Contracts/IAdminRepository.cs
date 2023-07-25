@@ -4,6 +4,6 @@ namespace OnboardingWebsite.Contracts
 {
     public interface IAdminRepository
     {
-       List<DasboardVM> GetEmployeeDetails();
+      Task <List<DashboardVM>> GetEmployeeDetails();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace OnboardingWebsite.Models
 {
-    public class DasboardVM
+    public class DashboardVM
     {
         public string Empid { get; set; }
         public string Empname { get; set; }
