@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using OnboardingWebsite.Contracts;
 using OnboardingWebsite.Data;
+using OnboardingWebsite.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultCOnnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
+builder.Services.AddTransient<IAdminRepository,AdminRepository>();  
 
 
 builder.Services.AddControllers();
