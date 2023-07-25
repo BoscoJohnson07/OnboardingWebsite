@@ -438,42 +438,6 @@ namespace OnboardingWebsite.Migrations
 
                     b.ToTable("Logins");
                 });
-
-            modelBuilder.Entity("OnboardingWebsite.Data.Roles", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RoleId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("OnboardingWebsite.Data.UserRoles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Roleid")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Userid")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserRoles");
-                });
 #pragma warning restore 612, 618
         }
     }
