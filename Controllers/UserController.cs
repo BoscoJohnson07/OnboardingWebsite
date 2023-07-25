@@ -7,7 +7,6 @@ namespace OnboardingWebsite.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        //hello gabby john
-        sodhkfhkshksufhusdh
+        
     }
 }
