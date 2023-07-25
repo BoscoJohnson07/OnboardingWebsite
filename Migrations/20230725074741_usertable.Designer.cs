@@ -12,8 +12,8 @@ using OnboardingWebsite.Data;
 namespace OnboardingWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230724105220_OnboardingDb")]
-    partial class OnboardingDb
+    [Migration("20230725074741_usertable")]
+    partial class usertable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
