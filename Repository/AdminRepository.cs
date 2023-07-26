@@ -30,7 +30,7 @@ namespace OnboardingWebsite.Repository
                                        Email = l.Emailid,
                                        education = ee.Degree
                                    }).ToList();
-            return employeedetails;
+            return  employeedetails;
         }
     }
 }

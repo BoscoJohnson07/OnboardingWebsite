@@ -25,6 +25,10 @@ namespace OnboardingWebsite.Controllers
             return await _adminRepository.GetEmployeeDetails();
         }
 
+        [HttpDelete("api/AdminDeleteById")]
+        public async Task deleteEMployee()
+        {
 
+        }
     }
 }
