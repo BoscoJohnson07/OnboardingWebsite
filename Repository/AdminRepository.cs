@@ -24,7 +24,7 @@ namespace OnboardingWebsite.Repository
         {
             if(employeeId != null) 
             {
-                (from e in _context.EmployeeGeneralDetails where e.Status == "A"
+               /* (from e in _context.EmployeeGeneralDetails where e.Status == "A"
                  join a in _context.Approvals on e.EmpID equals a.Empid where a.Status == "A"
                  join l in _context.Logins on e.EmployeeName equals l.Name where l.Status == "A"
                  join ec in _context.EmployeeContactDetails on e.EmpID equals ec.Empid where ec.Status == "A"
@@ -32,7 +32,7 @@ namespace OnboardingWebsite.Repository
                  join ead in _context.EmployeeAddressDetails on e.EmpID equals ead.Empid where ead.Status == "A"
                  join eed in _context.EmployeeExperienceDetails on e.EmpID equals eed.Empid where eed.Status=="A"
                  join ea in _context.EmployeeAdditionalInfo on e.EmpID equals ea.Empid where ea.Status=="A"
-                 ).ToList().ForEach() ;
+                 ).ToList().ForEach() ;*/
             }
         }
 
