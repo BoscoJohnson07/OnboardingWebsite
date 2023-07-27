@@ -21,6 +21,6 @@
         public string? CovidCerti { get; set; }
         public EducationDetailsVM UGDetails { get; set; }
         public EducationDetailsVM PGDetails { get; set; }
-        public ExperienceVM[] experienceVMs { get; set; }
+        public List< ExperienceVM> experienceVMs { get; set; }
     }
 }

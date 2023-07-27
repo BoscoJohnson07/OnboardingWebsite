@@ -1,4 +1,5 @@
-﻿using OnboardingWebsite.Contracts;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using OnboardingWebsite.Contracts;
 using OnboardingWebsite.Data;
 using OnboardingWebsite.Models;
 using System.Data.Entity.Core.Objects;
@@ -6,6 +7,7 @@ using System.Diagnostics.Metrics;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace OnboardingWebsite.Repository
@@ -22,8 +24,15 @@ namespace OnboardingWebsite.Repository
         {
             if(employeeId != null) 
             {
-                   
-                //_context.SaveChanges();
+                (from e in _context.EmployeeGeneralDetails where e.Status == "A"
+                 join a in _context.Approvals on e.EmpID equals a.Empid where a.Status == "A"
+                 join l in _context.Logins on e.EmployeeName equals l.Name where l.Status == "A"
+                 join ec in _context.EmployeeContactDetails on e.EmpID equals ec.Empid where ec.Status == "A"
+                 join ee in _context.EmployeeEducationDetails on e.EmpID equals ee.Empid where ee.Status == "A"
+                 join ead in _context.EmployeeAddressDetails on e.EmpID equals ead.Empid where ead.Status == "A"
+                 join eed in _context.EmployeeExperienceDetails on e.EmpID equals eed.Empid where eed.Status=="A"
+                 join ea in _context.EmployeeAdditionalInfo on e.EmpID equals ea.Empid where ea.Status=="A"
+                 ).ToList().ForEach() ;
             }
         }
 
@@ -52,7 +61,7 @@ namespace OnboardingWebsite.Repository
         {
             var address = (from e in _context.EmployeeGeneralDetails where e.EmpID == employeeid join ea in _context.EmployeeAddressDetails on e.EmpID equals ea.Empid select ea).ToArray();
             var degree = (from e in _context.EmployeeGeneralDetails where e.EmpID == employeeid join ee in _context.EmployeeEducationDetails on e.EmpID equals ee.Empid select ee).ToArray();
-            var experiencecount = (from e in _context.EmployeeExperienceDetails where e.Empid == employeeid join eed in _context.EmployeeExperienceDetails on e.Empid equals eed.Empid select eed).Count();
+            var experiencecount = (from e in _context.EmployeeExperienceDetails where e.Empid == employeeid join eed in _context.EmployeeExperienceDetails on e.Empid equals eed.Empid select eed).ToArray();
             var employeepersonal = (from e in _context.EmployeeGeneralDetails
                                     where e.EmpID == employeeid
                                     // join ea in _context.EmployeeAddressDetails on e.EmpID equals ea.Empid
@@ -63,7 +72,7 @@ namespace OnboardingWebsite.Repository
                                         Empid = e.EmpID,
                                         EmpName = e.EmployeeName,
                                         FatherName = e.FatherName,
-                                        DOB =e.DOB,
+                                        DOB = e.DOB,
                                         mailId = ec.Personal_Emailid,
                                         MaritialStatus = e.MaritalName,
                                         DOM = e.DateOfMarriage,
@@ -80,7 +89,7 @@ namespace OnboardingWebsite.Repository
                                             State = address[0].State,
                                             Pincode = address[0].Pincode
                                         },
-                                        TemporaryAddress=new AddressVM()
+                                        TemporaryAddress = new AddressVM()
                                         {
                                             Address = address[1].Address,
                                             Country = address[1].Country,
@@ -90,10 +99,10 @@ namespace OnboardingWebsite.Repository
                                         },
                                         CovidSts = ead.Covid_VaccSts,
                                         CovidCerti = ead.Vacc_Certificate,
-                                        UGDetails=new EducationDetailsVM()
+                                        UGDetails = new EducationDetailsVM()
                                         {
                                             CollegeName = degree[0].CollegeName,
-                                            Degree= degree[0].Degree,
+                                            Degree = degree[0].Degree,
                                             Major = degree[0].specialization,
                                             PassedoutYear = degree[0].Passoutyear,
                                             Certificate = degree[0].Certificate
@@ -101,14 +110,34 @@ namespace OnboardingWebsite.Repository
                                         PGDetails = new EducationDetailsVM()
                                         {
                                             CollegeName = degree[1].CollegeName,
-                                            Degree= degree[1].Degree,
+                                            Degree = degree[1].Degree,
                                             Major = degree[1].specialization,
-                                            PassedoutYear= degree[1].Passoutyear,
+                                            PassedoutYear = degree[1].Passoutyear,
                                             Certificate = degree[1].Certificate
                                         },
-                                        
+                                        experienceVMs=Experrience(employeeid)
                                     }).ToList();
+           
             return employeepersonal;
+        }
+        public List<ExperienceVM> Experrience(string employeeid)
+        {
+            List<ExperienceVM> exVM = new List<ExperienceVM>();
+            var experiencecount = (from e in _context.EmployeeGeneralDetails where e.EmpID == employeeid join eed in _context.EmployeeExperienceDetails on e.EmpID equals eed.Empid select eed);
+            foreach (var experience in experiencecount)
+            {
+                exVM.Add(new ExperienceVM()
+                {
+                    CompanyName = experience.Company_name,
+                    StartDate = (DateTime)experience.StartDate,
+                    EndDate = (DateTime)experience.EndDate,
+                    Designation = experience.Designation,
+                    TotalNoofMonths = experience.Totalmonths,
+                    ReasonForLeaving=experience.Reason,
+                    ExperienceCerti=experience.Exp_Certificate
+                });
+            }
+            return exVM;
         }
     }
 }
