@@ -20,15 +20,21 @@ namespace OnboardingWebsite.Controllers
         }
 
         [HttpGet("api/AdminDashboard")]
-        public async Task <List<DashboardVM>> getEMployee() 
+        public async Task <List<DashboardVM>> getEmployee() 
         {
             return await _adminRepository.GetEmployeeDetails();
         }
 
-        [HttpDelete("api/AdminDeleteById")]
-        public async Task deleteEMployee()
+        [HttpPost("api/AdminDeleteById")]
+        public async Task deleteEmployee(string employeeid)
         {
+            
+        }
 
+        [HttpPost("api/GetEmployeeDetails")]
+        public async Task <List<PersonalInfoVM>> GetPersonalInfo(string employee)
+        {
+            return await _adminRepository.GetPersonalInfo(employee);
         }
     }
 }
