@@ -340,8 +340,11 @@ namespace OnboardingWebsite.Migrations
 
             modelBuilder.Entity("OnboardingWebsite.Data.EmployeeGeneralDetails", b =>
                 {
-                    b.Property<string>("EmpID")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("BloodGrp")
                         .IsRequired()
@@ -362,6 +365,10 @@ namespace OnboardingWebsite.Migrations
 
                     b.Property<DateTime?>("Date_Modified")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Empid")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("EmployeeName")
                         .IsRequired()
@@ -387,18 +394,15 @@ namespace OnboardingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("EmpID");
+                    b.HasKey("Id");
 
                     b.ToTable("EmployeeGeneralDetails");
                 });
 
             modelBuilder.Entity("OnboardingWebsite.Data.Login", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Empid")
+                        .HasColumnType("text");
 
                     b.Property<string>("Created_by")
                         .IsRequired()
@@ -407,7 +411,7 @@ namespace OnboardingWebsite.Migrations
                     b.Property<DateTime>("Date_Created")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("Date_Modified")
+                    b.Property<DateTime?>("Date_Modified")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Designation")
@@ -434,7 +438,7 @@ namespace OnboardingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("Empid");
 
                     b.ToTable("Logins");
                 });

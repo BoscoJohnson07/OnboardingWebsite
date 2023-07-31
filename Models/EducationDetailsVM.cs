@@ -6,7 +6,7 @@
         public string Degree { get; set; }
         public string Major { get; set; }
         public int PassedoutYear { get; set; }
-        public string Certificate { get; set; }
+        public byte[] Certificate { get; set; }
         
     }
 }

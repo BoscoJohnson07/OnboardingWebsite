@@ -8,6 +8,6 @@
         public DateTime EndDate { get; set;}
         public string ReasonForLeaving { get; set; }
         public int TotalNoofMonths { get; set; }
-        public string? ExperienceCerti { get; set; }
+        public byte[]? ExperienceCerti { get; set; }
     }
 }

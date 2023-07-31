@@ -1,4 +1,6 @@
-﻿namespace OnboardingWebsite.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace OnboardingWebsite.Models
 {
     public class PersonalInfoVM
     {

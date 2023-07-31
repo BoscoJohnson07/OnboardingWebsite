@@ -26,9 +26,9 @@ namespace OnboardingWebsite.Controllers
         }
 
         [HttpPost("api/AdminDeleteById")]
-        public async Task deleteEmployee(string employeeid)
+        public async Task deleteEmployee(string[] employeeid)
         {
-            
+            await _adminRepository.DeleteEmployee(employeeid);
         }
 
         [HttpPost("api/GetEmployeeDetails")]

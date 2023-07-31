@@ -1,12 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnboardingWebsite.Data
 {
     public class EmployeeGeneralDetails
     {
         [Key]
-        public string EmpID { get; set; }
+        public int Id { get; set; }
+        [ForeignKey("Empid")]
+        public string Empid { get; set; }
         public string EmployeeName { get; set; }
         public DateTime DOB {  get; set; }
         public string FatherName { get; set; }
